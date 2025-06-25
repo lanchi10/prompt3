@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחולל הפרומפטים האולטימטיבי - פרק ג': הכלי שיהפוך אותך למומחה</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Heebo', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientAnimation 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientAnimation {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .step-card.active {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        
+        .ai-platform-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .ai-platform-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(255,255,255,0.3);
+        }
+        
+        .ai-platform-card.selected {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.3) 0%, rgba(80, 200, 120, 0.3) 100%);
+            border: 2px solid rgba(74, 144, 226, 0.8);
+        }
+        
+        .pulse-button {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(74, 144, 226, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
+        }
+        
+        .result-box {
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .copy-button {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-button:hover {
+            background: linear-gradient(45deg, #44a08d, #4ecdc4);
+            transform: scale(1.05);
+        }
+        
+        .form-input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-input:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(74, 144, 226, 0.5);
+            outline: none;
+        }
+        
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .form-input option {
+            background: rgba(0,0,0,0.8);
+            color: white;
+        }
+        
+        .wizard-progress {
+            background: rgba(255,255,255,0.1);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .wizard-progress-bar {
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .logo-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        
+        .custom-input-container {
+            display: none;
+            margin-top: 1rem;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .custom-input-container.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .goal-option.custom-selected {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 193, 7, 0.3) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.8);
+        }
+        
+        .goal-option.selected {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.3) 0%, rgba(80, 200, 120, 0.3) 100%);
+            border: 2px solid rgba(74, 144, 226, 0.8);
+        }
+
+        .option-list {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .option-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            position: relative;
+        }
+
+        .option-item:last-child {
+            border-bottom: none;
+        }
+
+        .option-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .option-item.selected {
+            background: rgba(74, 144, 226, 0.3);
+            border-right: 4px solid #4a90e2;
+        }
+
+        .option-item input[type="radio"] {
+            display: none;
+        }
+
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .option-item.selected .radio-custom {
+            border-color: #4a90e2;
+            background: #4a90e2;
+        }
+
+        .option-item.selected .radio-custom::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Navigation Styles */
+        .navigation-bar {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem 0;
+        }
+
+        .nav-chapter {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .nav-chapter:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .nav-chapter.current {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.3) 0%, rgba(80, 200, 120, 0.3) 100%);
+            border: 2px solid rgba(74, 144, 226, 0.8);
+        }
+
+        .nav-chapter .chapter-number {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .nav-chapter.current .chapter-number {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <div class="logo-container mb-6">
+                <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/3c1fc5ac-8855-4c3d-a9d0-a082d92e013d" 
+                     alt="LANCHI Logo" class="h-12 mx-auto">
+            </div>
+            <h1 class="text-5xl font-bold text-white mb-4 floating">
+                מחולל הפרומפטים האולטימטיבי
+            </h1>
+            <h2 class="text-2xl gradient-text font-semibold mb-4">
+                פרק ג': הכלי שיהפוך אותך למומחה
+            </h2>
+            <p class="text-xl text-white opacity-90 max-w-4xl mx-auto leading-relaxed">
+                המחולל הכי מתקדם לפרומפטים! הדרכה אישית צעד אחר צעד, התאמה לכל פלטפורמת AI, 
+                ויצירה אוטומטית של פרומפטים מותאמים אישית עם אפשרות הגדרה אישית מלאה
+            </p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="wizard-progress mb-8">
+            <div class="wizard-progress-bar" id="progressBar" style="width: 20%"></div>
+        </div>
+
+        <!-- Step 1: Welcome -->
+        <div class="step-card rounded-xl p-8 mb-8 active" id="step1">
+            <div class="text-center">
+                <i class="fas fa-rocket text-4xl text-blue-300 mb-4"></i>
+                <h3 class="text-3xl font-bold text-white mb-4">ברוכים הבאים למחולל האולטימטיבי!</h3>
+                <p class="text-lg text-white opacity-90 mb-6 max-w-2xl mx-auto">
+                    אני אוביל אותך צעד אחר צעד ליצירת הפרומפט המושלם, מותאם במיוחד לפלטפורמת ה-AI שתבחר.
+                    בכל שלב תוכל לבחור מהאפשרויות המוכנות או להגדיר בעצמך ערכים מותאמים אישית.
+                    בואו נתחיל במסע שיהפוך אותך למומחה פרומפטים!
+                </p>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-all pulse-button" 
+                        onclick="nextStep()">
+                    <i class="fas fa-arrow-left ml-2"></i>
+                    בואו נתחיל!
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Goal Definition -->
+        <div class="step-card rounded-xl p-8 mb-8 hidden" id="step2">
+            <div class="text-center mb-6">
+                <i class="fas fa-bullseye text-4xl text-green-300 mb-4"></i>
+                <h3 class="text-3xl font-bold text-white mb-4">מה המטרה שלך?</h3>
+                <p class="text-lg text-white opacity-90 mb-6">
+                    בחר את סוג המשימה שאתה רוצה שה-AI יעזור לך בה, או הגדר מטרה משלך:
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectGoal('writing')">
+                    <i class="fas fa-pen text-2xl text-blue-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">כתיבה יצירתית</h4>
+                    <p class="text-white opacity-80 text-sm">מאמרים, סיפורים, תוכן שיווקי</p>
+                </div>
+                
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectGoal('analysis')">
+                    <i class="fas fa-chart-line text-2xl text-purple-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">ניתוח ומחקר</h4>
+                    <p class="text-white opacity-80 text-sm">ניתוח נתונים, מחקר, סיכומים</p>
+                </div>
+                
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectGoal('coding')">
+                    <i class="fas fa-code text-2xl text-green-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">תכנות</h4>
+                    <p class="text-white opacity-80 text-sm">קוד, באגים, סקריפטים</p>
+                </div>
+                
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectGoal('education')">
+                    <i class="fas fa-graduation-cap text-2xl text-yellow-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">חינוך והסבר</h4>
+                    <p class="text-white opacity-80 text-sm">הסברים, מושגים, לימוד</p>
+                </div>
+                
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectGoal('business')">
+                    <i class="fas fa-briefcase text-2xl text-red-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">עסקים</h4>
+                    <p class="text-white opacity-80 text-sm">אסטרטגיה, תכנון, פתרונות</p>
+                </div>
+                
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectGoal('creative')">
+                    <i class="fas fa-lightbulb text-2xl text-pink-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">פתרון בעיות</h4>
+                    <p class="text-white opacity-80 text-sm">חשיבה יצירתית, רעיונות</p>
+                </div>
+                
+                <div class="goal-option p-4 rounded-lg glass-effect cursor-pointer hover:bg-white hover:bg-opacity-20 transition-all" 
+                     onclick="selectCustomGoal()">
+                    <i class="fas fa-edit text-2xl text-orange-300 mb-2"></i>
+                    <h4 class="text-white font-semibold">אחר - הגדר בעצמך</h4>
+                    <p class="text-white opacity-80 text-sm">תחום מותאם אישית</p>
+                </div>
+            </div>
+            
+            <div class="custom-input-container" id="customGoalContainer">
+                <div class="max-w-lg mx-auto">
+                    <label class="text-white font-semibold mb-2 block">תאר את המטרה שלך:</label>
+                    <input type="text" class="form-input w-full rounded-lg p-3" id="customGoalInput" 
+                           placeholder="לדוגמה: יצירת תוכן לרשתות חברתיות, תרגום מקצועי, ייעוץ אישי...">
+                </div>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg ml-4 transition-all" 
+                        onclick="prevStep()">
+                    <i class="fas fa-arrow-right ml-2"></i>
+                    חזרה
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all opacity-50" 
+                        onclick="nextStep()" id="goalNextBtn" disabled>
+                    <i class="fas fa-arrow-left ml-2"></i>
+                    המשך
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Details -->
+        <div class="step-card rounded-xl p-8 mb-8 hidden" id="step3">
+            <div class="text-center mb-6">
+                <i class="fas fa-clipboard-list text-4xl text-purple-300 mb-4"></i>
+                <h3 class="text-3xl font-bold text-white mb-4">בואו נפרט את הבקשה</h3>
+                <p class="text-lg text-white opacity-90 mb-6">
+                    ספר לי בפירוט מה אתה רוצה להשיג:
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <textarea class="form-input w-full h-32 rounded-lg p-4 mb-4 resize-none" 
+                          id="taskDetails" 
+                          placeholder="לדוגמה: אני רוצה לכתוב מאמר על השפעת AI על העתיד, באורך של 800 מילים, בסגנון מקצועי אך נגיש לקהל הרחב..."></textarea>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="text-white font-semibold mb-3 block text-lg">אורך התגובה המבוקש:</label>
+                        <div class="option-list">
+                            <div class="option-item" onclick="selectOption('responseLength', 'short', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">קצר (כמה משפטים)</span>
+                            </div>
+                            <div class="option-item selected" onclick="selectOption('responseLength', 'medium', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">בינוני (פסקה-שתיים)</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption('responseLength', 'long', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">ארוך (מאמר מפורט)</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption('responseLength', 'comprehensive', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">מקיף (ניתוח מלא)</span>
+                            </div>
+                            <div class="option-item" onclick="selectCustomOption('responseLength', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">אחר - הגדר בעצמך</span>
+                            </div>
+                        </div>
+                        <div class="custom-input-container" id="customLengthContainer">
+                            <input type="text" class="form-input w-full rounded-lg p-3 mt-3" id="customLengthInput" 
+                                   placeholder="תאר את האורך הרצוי: למשל '500 מילים', 'דף אחד', '3 פסקאות'...">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="text-white font-semibold mb-3 block text-lg">סגנון התגובה:</label>
+                        <div class="option-list">
+                            <div class="option-item selected" onclick="selectOption('responseStyle', 'professional', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">מקצועי</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption('responseStyle', 'casual', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">נעים וידידותי</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption('responseStyle', 'academic', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">אקדמי</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption('responseStyle', 'creative', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">יצירתי</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption('responseStyle', 'simple', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">פשוט ונגיש</span>
+                            </div>
+                            <div class="option-item" onclick="selectCustomOption('responseStyle', this)">
+                                <span class="radio-custom"></span>
+                                <span class="font-medium">אחר - הגדר בעצמך</span>
+                            </div>
+                        </div>
+                        <div class="custom-input-container" id="customStyleContainer">
+                            <input type="text" class="form-input w-full rounded-lg p-3 mt-3" id="customStyleInput" 
+                                   placeholder="תאר את הסגנון הרצוי: למשל 'הומוריסטי', 'טכני מאוד', 'משפטי'...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="text-white font-semibold mb-2 block">תחום התמחות (אופציונלי):</label>
+                    <select class="form-input w-full rounded-lg p-3" id="expertiseField" onchange="checkCustomExpertise()">
+                        <option value="">לא נדרש</option>
+                        <option value="technology">טכנולוגיה</option>
+                        <option value="marketing">שיווק</option>
+                        <option value="finance">כלכלה ופיננסים</option>
+                        <option value="legal">משפטים</option>
+                        <option value="medical">רפואה</option>
+                        <option value="education">חינוך</option>
+                        <option value="science">מדע</option>
+                        <option value="art">אמנות ותרבות</option>
+                        <option value="custom">אחר - הגדר בעצמך</option>
+                    </select>
+                    <div class="custom-input-container" id="customExpertiseContainer">
+                        <input type="text" class="form-input w-full rounded-lg p-3 mt-2" id="customExpertiseInput" 
+                               placeholder="תאר את תחום ההתמחות: למשל 'פסיכולוגיה', 'גיימינג', 'בישול'...">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg ml-4 transition-all" 
+                        onclick="prevStep()">
+                    <i class="fas fa-arrow-right ml-2"></i>
+                    חזרה
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all" 
+                        onclick="nextStep()">
+                    <i class="fas fa-arrow-left ml-2"></i>
+                    המשך
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 4: AI Platform Selection -->
+        <div class="step-card rounded-xl p-8 mb-8 hidden" id="step4">
+            <div class="text-center mb-6">
+                <i class="fas fa-robot text-4xl text-cyan-300 mb-4"></i>
+                <h3 class="text-3xl font-bold text-white mb-4">איזה AI תשתמש?</h3>
+                <p class="text-lg text-white opacity-90 mb-6">
+                    בחר את פלטפורמת ה-AI שתשתמש בה - אני אתאים את הפרומפט במיוחד עבורה:
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('genspark')">
+                    <div class="text-center">
+                        <i class="fas fa-star text-3xl text-yellow-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">Genspark</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">הפלטפורמה המתקדמת - חיפוש ויצירה</p>
+                        <div class="text-xs text-yellow-300">✓ יכולות מתקדמות ומקצועיות</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('chatgpt')">
+                    <div class="text-center">
+                        <i class="fab fa-openai text-3xl text-green-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">ChatGPT</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">הפופולרי ביותר - מעולה לכתיבה ושיחה</p>
+                        <div class="text-xs text-green-300">✓ חזק בשפה עברית</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('claude')">
+                    <div class="text-center">
+                        <i class="fas fa-brain text-3xl text-purple-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">Claude</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">מתקדם בניתוח וכתיבה מקצועית</p>
+                        <div class="text-xs text-purple-300">✓ עומק ודיוק גבוה</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('gemini')">
+                    <div class="text-center">
+                        <i class="fab fa-google text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">Gemini</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">של גוגל - חזק במידע ומחקר</p>
+                        <div class="text-xs text-blue-300">✓ גישה למידע עדכני</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('perplexity')">
+                    <div class="text-center">
+                        <i class="fas fa-search text-3xl text-yellow-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">Perplexity</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">מומחה במחקר ומקורות מהימנים</p>
+                        <div class="text-xs text-yellow-300">✓ ציטוטים ומקורות</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('copilot')">
+                    <div class="text-center">
+                        <i class="fab fa-microsoft text-3xl text-blue-500 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">Copilot</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">של מיקרוסופט - מתקדם ומשולב</p>
+                        <div class="text-xs text-blue-300">✓ שילוב עם כלי מיקרוסופט</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('grok')">
+                    <div class="text-center">
+                        <i class="fab fa-x-twitter text-3xl text-gray-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">Grok</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">של X - עדכני ושנון</p>
+                        <div class="text-xs text-gray-300">✓ מידע רלוונטי ועדכני</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectPlatform('deepseek')">
+                    <div class="text-center">
+                        <i class="fas fa-microscope text-3xl text-red-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">DeepSeek</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">מתקדם וחכם - לכל המשימות</p>
+                        <div class="text-xs text-red-300">✓ יכולות מתקדמות</div>
+                    </div>
+                </div>
+                
+                <div class="ai-platform-card p-6 rounded-xl" onclick="selectCustomPlatform()">
+                    <div class="text-center">
+                        <i class="fas fa-plus-circle text-3xl text-orange-400 mb-3"></i>
+                        <h4 class="text-white font-bold text-lg mb-2">אחר - הגדר בעצמך</h4>
+                        <p class="text-white opacity-80 text-sm mb-3">פלטפורמה אחרת</p>
+                        <div class="text-xs text-orange-300">✓ התאמה אישית</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="custom-input-container" id="customPlatformContainer">
+                <div class="max-w-lg mx-auto">
+                    <label class="text-white font-semibold mb-2 block">איזה AI תשתמש?</label>
+                    <input type="text" class="form-input w-full rounded-lg p-3" id="customPlatformInput" 
+                           placeholder="לדוגמה: Llama, Mistral, AI אחר...">
+                </div>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg ml-4 transition-all" 
+                        onclick="prevStep()">
+                    <i class="fas fa-arrow-right ml-2"></i>
+                    חזרה
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all opacity-50" 
+                        onclick="nextStep()" id="platformNextBtn" disabled>
+                    <i class="fas fa-arrow-left ml-2"></i>
+                    יצירת הפרומפט!
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 5: Generated Prompt -->
+        <div class="step-card rounded-xl p-8 mb-8 hidden" id="step5">
+            <div class="text-center mb-6">
+                <i class="fas fa-magic text-4xl text-yellow-300 mb-4"></i>
+                <h3 class="text-3xl font-bold text-white mb-4">הפרומפט שלך מוכן!</h3>
+                <p class="text-lg text-white opacity-90 mb-6">
+                    הפרומפט שלך נוצר ומותאם במיוחד ל<span id="selectedPlatformName" class="font-bold"></span>
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="result-box rounded-xl p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-white font-bold text-lg">
+                            <i class="fas fa-file-alt ml-2"></i>
+                            הפרומפט המותאם שלך:
+                        </h4>
+                        <button class="copy-button text-white px-4 py-2 rounded-lg font-semibold" 
+                                onclick="copyPrompt()">
+                            <i class="fas fa-copy ml-2"></i>
+                            העתק
+                        </button>
+                    </div>
+                    <div class="bg-black bg-opacity-30 rounded-lg p-4">
+                        <pre class="text-white text-sm leading-relaxed whitespace-pre-wrap" id="generatedPrompt"></pre>
+                    </div>
+                </div>
+                
+                <!-- Platform-specific tips -->
+                <div class="glass-effect rounded-xl p-6 mb-6">
+                    <h4 class="text-white font-bold text-lg mb-4">
+                        <i class="fas fa-lightbulb ml-2"></i>
+                        טיפים לשימוש ב<span id="platformTipsName"></span>:
+                    </h4>
+                    <div id="platformTips" class="text-white opacity-90"></div>
+                </div>
+                
+                <!-- Example Usage -->
+                <div class="glass-effect rounded-xl p-6 mb-6">
+                    <h4 class="text-white font-bold text-lg mb-4">
+                        <i class="fas fa-play-circle ml-2"></i>
+                        איך להשתמש:
+                    </h4>
+                    <div class="text-white opacity-90">
+                        <p class="mb-2">1. העתק את הפרומפט (כפתור "העתק" למעלה)</p>
+                        <p class="mb-2">2. פתח את פלטפורמת ה-AI שבחרת</p>
+                        <p class="mb-2">3. הדבק את הפרומפט כהודעה ראשונה</p>
+                        <p class="mb-2">4. שלח ותראה את התוצאות המדהימות!</p>
+                        <p class="text-green-300">💡 אם התוצאה לא מושלמת, בקש הבהרות או שיפורים ספציפיים</p>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="text-center">
+                    <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg ml-4 transition-all" 
+                            onclick="startOver()">
+                        <i class="fas fa-redo ml-2"></i>
+                        צור פרומפט חדש
+                    </button>
+                    <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all" 
+                            onclick="openPlatform()" id="openPlatformBtn">
+                        <i class="fas fa-external-link-alt ml-2"></i>
+                        פתח את הפלטפורמה
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navigation-bar">
+        <div class="container mx-auto px-4">
+            <h3 class="text-white font-bold text-2xl text-center mb-6">
+                <i class="fas fa-map ml-2"></i>
+                מסלול מאסטר הפרומפטים של LANCHI
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Chapter 1 -->
+                <a href="https://prompt10.netlify.app/" class="nav-chapter">
+                    <div class="chapter-number">א'</div>
+                    <h4 class="text-white font-bold text-lg mb-2">הבסיס והיסודות</h4>
+                    <p class="text-white opacity-80 text-sm mb-3">
+                        המדריך הסופי לכתיבת פרומפטים מושלמים
+                    </p>
+                    <div class="text-xs text-blue-300">
+                        <i class="fas fa-book ml-1"></i>
+                        טכניקות בסיסיות | דוגמאות מעשיות | טיפים מקצועיים
+                    </div>
+                </a>
+
+                <!-- Chapter 2 -->
+                <a href="https://prompt20.netlify.app/" class="nav-chapter">
+                    <div class="chapter-number">ב'</div>
+                    <h4 class="text-white font-bold text-lg mb-2">המעבדה המתקדמת</h4>
+                    <p class="text-white opacity-80 text-sm mb-3">
+                        כלים מקצועיים ותחנות עבודה אינטראקטיביות
+                    </p>
+                    <div class="text-xs text-purple-300">
+                        <i class="fas fa-flask ml-1"></i>
+                        5 תחנות עבודה | דמואים חיים | טכניקות מתקדמות
+                    </div>
+                </a>
+
+                <!-- Chapter 3 - Current -->
+                <div class="nav-chapter current">
+                    <div class="chapter-number">ג'</div>
+                    <h4 class="text-white font-bold text-lg mb-2">המחולל האולטימטיבי</h4>
+                    <p class="text-white opacity-80 text-sm mb-3">
+                        הכלי המתקדם ביותר ליצירת פרומפטים מותאמים
+                    </p>
+                    <div class="text-xs text-yellow-300">
+                        <i class="fas fa-star ml-1"></i>
+                        פרק נוכחי | מחולל חכם | התאמה לכל AI
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="mt-8 text-center">
+                <h4 class="text-white font-semibold mb-4">קישורים מהירים:</h4>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://prompt10.netlify.app/#basics" class="text-blue-300 hover:text-white transition-colors">
+                        <i class="fas fa-book-open ml-1"></i>
+                        יסודות הפרומפטים
+                    </a>
+                    <a href="https://prompt20.netlify.app/#advanced-lab" class="text-purple-300 hover:text-white transition-colors">
+                        <i class="fas fa-flask ml-1"></i>
+                        מעבדה מתקדמת
+                    </a>
+                    <a href="#step1" class="text-yellow-300 hover:text-white transition-colors">
+                        <i class="fas fa-magic ml-1"></i>
+                        מחולל אולטימטיבי
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-effect py-6 mt-8">
+        <div class="container mx-auto text-center">
+            <p class="text-white opacity-80">
+                <i class="fas fa-heart text-red-400 ml-1"></i>
+                נוצר ע"י LANCHI מלנצי לטובת שימוש בני המשפחה והחברים
+            </p>
+            <p class="text-white opacity-60 text-sm mt-2">
+                המחולל האולטימטיבי לפרומפטים מותאמים אישית - פרק ג' בסדרת מאסטר הפרומפטים
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        let selectedGoal = '';
+        let selectedPlatform = '';
+        let generatedPromptText = '';
+        let customGoal = '';
+        let customPlatform = '';
+        let responseLength = 'medium';
+        let responseStyle = 'professional';
+        
+        const platforms = {
+            genspark: {
+                name: 'Genspark',
+                url: 'https://www.genspark.ai',
+                tips: `
+                    • Genspark מצוין לחיפוש מקצועי ויצירה מתקדמת
+                    • השתמש בכלים המיוחדים כמו חיפוש, ניתוח ויצירת תוכן
+                    • בקש מהמערכת לחפש מידע עדכני בזמן אמת
+                    • נסה לנצל את היכולות המתקדמות לניתוח ויצירה
+                    • מעולה למשימות מקצועיות ומורכבות
+                `
+            },
+            chatgpt: {
+                name: 'ChatGPT',
+                url: 'https://chat.openai.com',
+                tips: `
+                    • השתמש בפרומפט הזה בתור הודעה ראשונה
+                    • אם התגובה לא מספקת, בקש "תוסיף פרטים נוספים"
+                    • נסה להתייחס לתגובה ולבקש הבהרות ספציפיות
+                    • ChatGPT אוהב כשמפרטים בדיוק מה רוצים
+                    • אפשר להמשיך את השיחה ולבקש שיפורים
+                `
+            },
+            claude: {
+                name: 'Claude',
+                url: 'https://claude.ai',
+                tips: `
+                    • Claude מעדיף הקשר ברור - תן לו רקע מפורט
+                    • הוא מצוין בניתוח מעמיק, אז בקש הסברים
+                    • השתמש בביטויים כמו "נתח לעומק" או "הסבר את ההיגיון"
+                    • Claude טוב מאוד בכתיבה מקצועית ומובנית
+                    • הוא אוהב לקבל פידבק על איכות התגובה
+                `
+            },
+            gemini: {
+                name: 'Gemini',
+                url: 'https://gemini.google.com',
+                tips: `
+                    • Gemini חזק במידע עדכני - בקש עדכונים אחרונים
+                    • הוא מצוין בחיפוש ומחקר - השתמש בו לעובדות
+                    • נסה לבקש מקורות ואסמכתאות
+                    • טוב מאוד לשאלות כלליות ומחקר רחב
+                    • יכול לשלב מידע מכמה מקורות יחד
+                `
+            },
+            perplexity: {
+                name: 'Perplexity',
+                url: 'https://perplexity.ai',
+                tips: `
+                    • Perplexity מעולה למחקר עם מקורות
+                    • תמיד יספק לך קישורים לעיון נוסף
+                    • מעדיף שאלות ספציפיות ומחקריות
+                    • השתמש בו כשאתה צריך עובדות מהימנות
+                    • מצוין לקבלת מבט רחב על נושא עם מקורות
+                `
+            },
+            copilot: {
+                name: 'Copilot',
+                url: 'https://copilot.microsoft.com',
+                tips: `
+                    • Copilot משתלב מעולה עם כלי מיקרוסופט
+                    • מעולה למשימות מקצועיות ועסקיות
+                    • יכול לעזור בניתוח דוקומנטים ונתונים
+                    • השתמש בו לעבודה עם Office ושירותי מיקרוסופט
+                    • טוב מאוד בפתרונות טכנולוגיים ועסקיים
+                `
+            },
+            grok: {
+                name: 'Grok',
+                url: 'https://x.com',
+                tips: `
+                    • Grok מעדכן ועדכני - טוב לנושאים חמים
+                    • הוא יותר נינוח ואישי בסגנון
+                    • מעולה למידע מהימן ועדכני
+                    • נסה להיות ישיר ופתוח איתו
+                    • טוב במיוחד לעדכונים מהרשתות החברתיות
+                `
+            },
+            deepseek: {
+                name: 'DeepSeek',
+                url: 'https://chat.deepseek.com',
+                tips: `
+                    • DeepSeek מאוד מתקדם ואנליטי
+                    • מעולה למשימות מורכבות ומתקדמות
+                    • השתמש בו לניתוחים מעמיקים
+                    • טוב מאוד בפתרון בעיות מורכבות
+                    • יכול להתמודד עם משימות טכניות מאתגרות
+                `
+            },
+            custom: {
+                name: '',
+                url: '#',
+                tips: `
+                    • השתמש בפרומפט כהודעה ראשונה
+                    • התאם את הסגנון לפי היכולות של הפלטפורמה
+                    • נסה לבקש הבהרות אם הפרומפט לא ברור
+                    • כל AI עובד קצת אחרת - תתאים בהתאם
+                    • אל תהסס לשנות את הפרומפט אם נדרש
+                `
+            }
+        };
+
+        function selectOption(type, value, element) {
+            // Remove selected class from all options in this group
+            const parent = element.closest('.option-list');
+            parent.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Store the selected value
+            if (type === 'responseLength') {
+                responseLength = value;
+                document.getElementById('customLengthContainer').classList.remove('show');
+            } else if (type === 'responseStyle') {
+                responseStyle = value;
+                document.getElementById('customStyleContainer').classList.remove('show');
+            }
+        }
+
+        function selectCustomOption(type, element) {
+            // Remove selected class from all options in this group
+            const parent = element.closest('.option-list');
+            parent.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Show custom input container
+            if (type === 'responseLength') {
+                responseLength = 'custom';
+                document.getElementById('customLengthContainer').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('customLengthInput').focus();
+                }, 100);
+            } else if (type === 'responseStyle') {
+                responseStyle = 'custom';
+                document.getElementById('customStyleContainer').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('customStyleInput').focus();
+                }, 100);
+            }
+        }
+
+        function nextStep() {
+            if (currentStep === 1) {
+                showStep(2);
+                updateProgress(40);
+            } else if (currentStep === 2 && (selectedGoal || customGoal)) {
+                showStep(3);
+                updateProgress(60);
+            } else if (currentStep === 3) {
+                showStep(4);
+                updateProgress(80);
+            } else if (currentStep === 4 && (selectedPlatform || customPlatform)) {
+                generatePrompt();
+                showStep(5);
+                updateProgress(100);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+                updateProgress((currentStep - 1) * 20);
+            }
+        }
+
+        function showStep(step) {
+            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            
+            currentStep = step;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+        }
+
+        function updateProgress(width) {
+            document.getElementById('progressBar').style.width = width + '%';
+        }
+
+        function selectGoal(goal) {
+            selectedGoal = goal;
+            customGoal = '';
+            
+            // Remove active class from all options
+            document.querySelectorAll('.goal-option').forEach(option => {
+                option.classList.remove('selected', 'custom-selected');
+            });
+            
+            // Add active class to selected option
+            event.target.closest('.goal-option').classList.add('selected');
+            
+            // Hide custom input
+            document.getElementById('customGoalContainer').classList.remove('show');
+            
+            // Enable next button
+            enableGoalNextButton();
+        }
+
+        function selectCustomGoal() {
+            selectedGoal = '';
+            
+            // Remove active class from all options
+            document.querySelectorAll('.goal-option').forEach(option => {
+                option.classList.remove('selected', 'custom-selected');
+            });
+            
+            // Add custom selected class
+            event.target.closest('.goal-option').classList.add('custom-selected');
+            
+            // Show custom input
+            document.getElementById('customGoalContainer').classList.add('show');
+            
+            // Focus on input
+            setTimeout(() => {
+                document.getElementById('customGoalInput').focus();
+            }, 100);
+            
+            // Add event listener for custom input
+            document.getElementById('customGoalInput').addEventListener('input', function() {
+                customGoal = this.value.trim();
+                if (customGoal) {
+                    enableGoalNextButton();
+                } else {
+                    disableGoalNextButton();
+                }
+            });
+        }
+
+        function selectPlatform(platform) {
+            selectedPlatform = platform;
+            customPlatform = '';
+            
+            // Remove selected class from all platforms
+            document.querySelectorAll('.ai-platform-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked platform
+            event.target.closest('.ai-platform-card').classList.add('selected');
+            
+            // Hide custom input
+            document.getElementById('customPlatformContainer').classList.remove('show');
+            
+            // Enable next button
+            enablePlatformNextButton();
+        }
+
+        function selectCustomPlatform() {
+            selectedPlatform = '';
+            
+            // Remove selected class from all platforms
+            document.querySelectorAll('.ai-platform-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to custom platform
+            event.target.closest('.ai-platform-card').classList.add('selected');
+            
+            // Show custom input
+            document.getElementById('customPlatformContainer').classList.add('show');
+            
+            // Focus on input
+            setTimeout(() => {
+                document.getElementById('customPlatformInput').focus();
+            }, 100);
+            
+            // Add event listener for custom input
+            document.getElementById('customPlatformInput').addEventListener('input', function() {
+                customPlatform = this.value.trim();
+                if (customPlatform) {
+                    enablePlatformNextButton();
+                } else {
+                    disablePlatformNextButton();
+                }
+            });
+        }
+
+        function checkCustomExpertise() {
+            const expertiseSelect = document.getElementById('expertiseField');
+            const customContainer = document.getElementById('customExpertiseContainer');
+            
+            if (expertiseSelect.value === 'custom') {
+                customContainer.classList.add('show');
+                document.getElementById('customExpertiseInput').focus();
+            } else {
+                customContainer.classList.remove('show');
+            }
+        }
+
+        function enableGoalNextButton() {
+            const btn = document.getElementById('goalNextBtn');
+            btn.disabled = false;
+            btn.classList.remove('opacity-50');
+        }
+
+        function disableGoalNextButton() {
+            const btn = document.getElementById('goalNextBtn');
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+        }
+
+        function enablePlatformNextButton() {
+            const btn = document.getElementById('platformNextBtn');
+            btn.disabled = false;
+            btn.classList.remove('opacity-50');
+        }
+
+        function disablePlatformNextButton() {
+            const btn = document.getElementById('platformNextBtn');
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+        }
+
+        function generatePrompt() {
+            const taskDetails = document.getElementById('taskDetails').value;
+            let lengthValue = responseLength;
+            let styleValue = responseStyle;
+            let expertiseField = document.getElementById('expertiseField').value;
+            
+            // Handle custom inputs
+            if (responseLength === 'custom') {
+                lengthValue = document.getElementById('customLengthInput').value || 'מותאם אישית';
+            }
+            if (responseStyle === 'custom') {
+                styleValue = document.getElementById('customStyleInput').value || 'מותאם אישית';
+            }
+            if (expertiseField === 'custom') {
+                expertiseField = document.getElementById('customExpertiseInput').value || 'מותאם אישית';
+            }
+            
+            const goalTemplates = {
+                writing: 'כתיבה יצירתית ומקצועית',
+                analysis: 'ניתוח מעמיק ומחקר מפורט',
+                coding: 'פתרונות תכנות וקוד איכותי',
+                education: 'הסבר חינוכי ברור ומפורט',
+                business: 'פתרונות עסקיים אסטרטגיים',
+                creative: 'פתרון יצירתי ומחשבה מחוץ לקופסה'
+            };
+
+            const lengthInstructions = {
+                short: 'בתגובה קצרה וממוקדת (כמה משפטים)',
+                medium: 'בתגובה בינונית ומאוזנת (1-2 פסקאות)',
+                long: 'בתגובה מפורטת וארוכה (מאמר מלא)',
+                comprehensive: 'בניתוח מקיף ומעמיק עם כל הפרטים'
+            };
+
+            const styleInstructions = {
+                professional: 'בסגנון מקצועי ופורמלי',
+                casual: 'בסגנון נעים, ידידותי ונגיש',
+                academic: 'בסגנון אקדמי מדעי עם מקורות',
+                creative: 'בסגנון יצירתי ומעניין',
+                simple: 'בסגנון פשוט, ברור ונגיש לכולם'
+            };
+
+            const expertiseTemplates = {
+                technology: 'מבחינה טכנולוגית',
+                marketing: 'מבחינה שיווקית',
+                finance: 'מבחינה כלכלית ופיננסית',
+                legal: 'מבחינה משפטית',
+                medical: 'מבחינה רפואית',
+                education: 'מבחינה חינוכית',
+                science: 'מבחינה מדעית',
+                art: 'מבחינה אמנותית ותרבותית'
+            };
+
+            // Determine the goal text
+            let goalText = customGoal || goalTemplates[selectedGoal] || 'משימה מותאמת אישית';
+            
+            // Determine the platform
+            let platformKey = selectedPlatform || 'custom';
+            let platformName = customPlatform || platforms[selectedPlatform]?.name || 'פלטפורמה מותאמת';
+            
+            // Update platform name for custom
+            if (platformKey === 'custom') {
+                platforms.custom.name = customPlatform;
+            }
+
+            // Platform-specific adjustments
+            let platformPrefix = '';
+            switch(platformKey) {
+                case 'genspark':
+                    platformPrefix = 'אני זקוק לעזרתך המקצועית המתקדמת. ';
+                    break;
+                case 'chatgpt':
+                    platformPrefix = 'אני זקוק לעזרתך המקצועית. ';
+                    break;
+                case 'claude':
+                    platformPrefix = 'אשמח לקבל את עזרתך בניתוח מעמיק. ';
+                    break;
+                case 'gemini':
+                    platformPrefix = 'אני מחפש מידע עדכני ומקיף. ';
+                    break;
+                case 'perplexity':
+                    platformPrefix = 'אני צריך מחקר מהימן עם מקורות. ';
+                    break;
+                case 'copilot':
+                    platformPrefix = 'אני מבקש את עזרתך המקצועית. ';
+                    break;
+                case 'grok':
+                    platformPrefix = 'בואו נעבד יחד על זה. ';
+                    break;
+                case 'deepseek':
+                    platformPrefix = 'אני מבקש ניתוח מתקדם ומעמיק. ';
+                    break;
+                case 'custom':
+                    platformPrefix = 'אני מבקש את עזרתך. ';
+                    break;
+            }
+
+            // Handle custom length and style
+            let lengthText = lengthInstructions[lengthValue] || `בהתאם לדרישה: ${lengthValue}`;
+            let styleText = styleInstructions[styleValue] || `בסגנון: ${styleValue}`;
+            
+            // Handle expertise field
+            let expertiseText = '';
+            if (expertiseField) {
+                expertiseText = expertiseTemplates[expertiseField] || `בהתמחות: ${expertiseField}`;
+                expertiseText = `\n- התמקד בתחום: ${expertiseText}`;
+            }
+
+            generatedPromptText = `${platformPrefix}
+
+המשימה שלי: ${goalText}
+
+פרטי הבקשה:
+${taskDetails || 'לא צוינו פרטים נוספים'}
+
+דרישות התגובה:
+- אורך: ${lengthText}
+- סגנון: ${styleText}${expertiseText}
+- השתמש בשפה עברית ברורה ומדויקת
+- ארגן את התוכן בצורה הגיונית ומובנת
+- אם משהו לא ברור, בקש הבהרות לפני התחלה
+
+${platformKey === 'genspark' ? '- נצל את הכלים המתקדמים שלך לחיפוש ויצירה מקצועית' : ''}
+${platformKey === 'perplexity' ? '- אנא כלול מקורות ואסמכתאות מהימנות' : ''}
+${platformKey === 'claude' ? '- אנא ספק ניתוח מעמיק ומובנה עם הסברים' : ''}
+${platformKey === 'gemini' ? '- אנא כלול מידע עדכני ורלוונטי' : ''}
+${platformKey === 'chatgpt' ? '- אשמח לתגובה מפורטת ומקצועית' : ''}
+${platformKey === 'copilot' ? '- אנא ספק פתרון מקצועי ומעשי' : ''}
+${platformKey === 'grok' ? '- בואו נתמודד עם זה יחד בצורה יצירתית' : ''}
+${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם ומחושב' : ''}
+
+תודה על העזרה המקצועית!`;
+
+            document.getElementById('generatedPrompt').textContent = generatedPromptText;
+            document.getElementById('selectedPlatformName').textContent = platformName;
+            document.getElementById('platformTipsName').textContent = platformName;
+            
+            let tips = platforms[platformKey]?.tips || platforms.custom.tips;
+            document.getElementById('platformTips').innerHTML = tips.replace(/\n/g, '<br>');
+            
+            // Handle open platform button
+            const openBtn = document.getElementById('openPlatformBtn');
+            if (platformKey === 'custom' || !platforms[platformKey]?.url || platforms[platformKey].url === '#') {
+                openBtn.style.display = 'none';
+            } else {
+                openBtn.style.display = 'inline-block';
+            }
+        }
+
+        function copyPrompt() {
+            navigator.clipboard.writeText(generatedPromptText).then(() => {
+                const button = event.target.closest('button');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check ml-2"></i>הועתק!';
+                button.classList.remove('copy-button');
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.add('copy-button');
+                    button.classList.remove('bg-green-500');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = generatedPromptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const button = event.target.closest('button');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check ml-2"></i>הועתק!';
+                button.classList.remove('copy-button');
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.add('copy-button');
+                    button.classList.remove('bg-green-500');
+                }, 2000);
+            });
+        }
+
+        function openPlatform() {
+            let platformKey = selectedPlatform || 'custom';
+            if (platforms[platformKey]?.url && platforms[platformKey].url !== '#') {
+                window.open(platforms[platformKey].url, '_blank');
+            }
+        }
+
+        function startOver() {
+            currentStep = 1;
+            selectedGoal = '';
+            selectedPlatform = '';
+            customGoal = '';
+            customPlatform = '';
+            responseLength = 'medium';
+            responseStyle = 'professional';
+            
+            // Reset all steps
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`step${i}`).classList.add('hidden');
+                document.getElementById(`step${i}`).classList.remove('active');
+            }
+            
+            // Show first step
+            document.getElementById('step1').classList.remove('hidden');
+            document.getElementById('step1').classList.add('active');
+            
+            // Reset progress
+            updateProgress(20);
+            
+            // Reset form
+            document.getElementById('taskDetails').value = '';
+            document.getElementById('expertiseField').selectedIndex = 0;
+            document.getElementById('customGoalInput').value = '';
+            document.getElementById('customPlatformInput').value = '';
+            document.getElementById('customLengthInput').value = '';
+            document.getElementById('customStyleInput').value = '';
+            document.getElementById('customExpertiseInput').value = '';
+            
+            // Hide custom containers
+            document.getElementById('customGoalContainer').classList.remove('show');
+            document.getElementById('customPlatformContainer').classList.remove('show');
+            document.getElementById('customLengthContainer').classList.remove('show');
+            document.getElementById('customStyleContainer').classList.remove('show');
+            document.getElementById('customExpertiseContainer').classList.remove('show');
+            
+            // Reset buttons
+            disableGoalNextButton();
+            disablePlatformNextButton();
+            
+            // Reset selections
+            document.querySelectorAll('.goal-option').forEach(option => {
+                option.classList.remove('selected', 'custom-selected');
+            });
+            document.querySelectorAll('.ai-platform-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Reset option lists
+            document.querySelectorAll('.option-list .option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Set default selections
+            document.querySelectorAll('.option-list').forEach((list, index) => {
+                if (index === 0) { // Response length list
+                    list.children[1].classList.add('selected'); // Medium
+                } else if (index === 1) { // Response style list
+                    list.children[0].classList.add('selected'); // Professional
+                }
+            });
+        }
+
+        // Initialize disabled buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            disableGoalNextButton();
+            disablePlatformNextButton();
+        });
+    </script>
+</body>
+</html>
