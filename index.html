@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מחולל הפרומפטים האולטימטיבי עם שיפור אוטומטי - פרק ג': הכלי שיהפוך אותך למומחה</title>
+    <title>מחולל הפרומפטים האולטימטיבי עם יעוץ חכם - פרק ג': הכלי שיהפוך אותך למומחה</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <style>
@@ -239,6 +239,47 @@
             transform: translate(-50%, -50%);
         }
 
+        /* Smart Recommendation Styles */
+        .smart-recommendation {
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+            border: 2px solid rgba(52, 211, 153, 0.4);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .smart-recommendation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(52, 211, 153, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .recommendation-icon {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
         /* Auto-Improvement Styles */
         .improvement-section {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
@@ -259,11 +300,6 @@
             height: 200%;
             background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
             animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .improvement-icon {
@@ -325,6 +361,7 @@
             padding: 1.5rem;
             border: 2px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .prompt-comparison.original {
@@ -456,6 +493,7 @@
             <p class="text-xl text-white opacity-90 max-w-4xl mx-auto leading-relaxed">
                 המחולל הכי מתקדם לפרומפטים! הדרכה אישית צעד אחר צעד, התאמה לכל פלטפורמת AI, 
                 ויצירה אוטומטית של פרומפטים מותאמים אישית עם <span class="text-yellow-300 font-bold">שיפור אוטומטי חכם</span>
+                ו<span class="text-green-300 font-bold">יעוץ מקצועי</span>
             </p>
         </div>
 
@@ -476,11 +514,12 @@
                 <div class="glass-effect rounded-lg p-4 mb-6 max-w-3xl mx-auto">
                     <div class="flex items-center justify-center mb-3">
                         <i class="fas fa-magic text-2xl text-yellow-300 ml-3"></i>
-                        <h4 class="text-xl font-bold text-white">חדש! תכונת השיפור האוטומטי</h4>
+                        <h4 class="text-xl font-bold text-white">חדש! תכונת השיפור האוטומטי + יעוץ חכם</h4>
                     </div>
                     <p class="text-white opacity-90">
                         לראשונה בעולם! המחולל ינתח את הפרומפט שיוצר, יזהה נקודות חוזק וחולשות,
-                        ויציע לך גרסה משופרת עם הסברים מפורטים. תוכל לבחור בין הגרסה המקורית למשופרת!
+                        ויציע לך גרסה משופרת עם הסברים מפורטים. בנוסף, יעניק לך המלצות חכמות
+                        איזה פלטפורמת AI תתאים בצורה הטובה ביותר למשימה שלך!
                     </p>
                 </div>
                 <p class="text-lg text-white opacity-90 mb-6">
@@ -701,6 +740,23 @@
                 <p class="text-lg text-white opacity-90 mb-6">
                     בחר את פלטפורמת ה-AI שתשתמש בה - אני אתאים את הפרומפט במיוחד עבורה:
                 </p>
+            </div>
+
+            <!-- Smart Recommendation Section -->
+            <div class="smart-recommendation mb-6" id="smartRecommendation" style="display: none;">
+                <div class="recommendation-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="text-center relative z-10">
+                    <h4 class="text-white font-bold text-lg mb-3">
+                        💡 המלצה חכמה מותאמת אישית
+                    </h4>
+                    <p class="text-white opacity-90 mb-4" id="recommendationText"></p>
+                    <p class="text-green-300 text-sm">
+                        <i class="fas fa-info-circle ml-1"></i>
+                        כמובן, הבחירה שלך לחלוטין! 😊
+                    </p>
+                </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
@@ -1042,6 +1098,18 @@
                         <i class="fas fa-magic ml-1"></i>
                         מחולל אולטימטיבי
                     </a>
+                    <a href="https://prompt12.netlify.app/" class="text-green-300 hover:text-white transition-colors">
+                        <i class="fas fa-link ml-1"></i>
+                        היבטים נוספים 1
+                    </a>
+                    <a href="https://app.base44.com/apps/685bd639e3f033f6992891a2/editor/preview/PromptGuide" class="text-pink-300 hover:text-white transition-colors">
+                        <i class="fas fa-guide ml-1"></i>
+                        מדריך פרומפטים
+                    </a>
+                    <a href="https://v0-interactive-landing-page-nine.vercel.app/" class="text-cyan-300 hover:text-white transition-colors">
+                        <i class="fas fa-desktop ml-1"></i>
+                        דף אינטראקטיבי
+                    </a>
                 </div>
             </div>
         </div>
@@ -1055,7 +1123,7 @@
                 נוצר ע"י LANCHI מלנצי לטובת שימוש בני המשפחה והחברים
             </p>
             <p class="text-white opacity-60 text-sm mt-2">
-                המחולל האולטימטיבי לפרומפטים עם שיפור אוטומטי - פרק ג' בסדרת מאסטר הפרומפטים
+                המחולל האולטימטיבי לפרומפטים עם שיפור אוטומטי ויעוץ חכם - פרק ג' בסדרת מאסטר הפרומפטים
             </p>
         </div>
     </footer>
@@ -1174,6 +1242,53 @@
             }
         };
 
+        const smartRecommendations = {
+            writing: {
+                primary: ['claude', 'chatgpt'],
+                text: 'בהתבסס על המשימה שלך בכתיבה יצירתית, אני ממליץ על Claude או ChatGPT - הם מעולים בכתיבה מקצועית ויצירתית!'
+            },
+            analysis: {
+                primary: ['genspark', 'perplexity'],
+                text: 'למשימת ניתוח ומחקר, Genspark או Perplexity יהיו מושלמים - הם מתמחים במחקר עמוק עם מקורות מהימנים!'
+            },
+            coding: {
+                primary: ['deepseek', 'copilot'],
+                text: 'לתכנות ופיתוח, DeepSeek או Copilot יעניקו לך פתרונות מתקדמים וקוד איכותי!'
+            },
+            education: {
+                primary: ['chatgpt', 'claude'],
+                text: 'למשימות חינוכיות והסבר, ChatGPT או Claude יודעים להסביר בצורה ברורה ומובנת!'
+            },
+            business: {
+                primary: ['genspark', 'copilot'],
+                text: 'לפתרונות עסקיים, Genspark או Copilot יספקו לך אסטרטגיות מקצועיות ומעשיות!'
+            },
+            creative: {
+                primary: ['chatgpt', 'claude'],
+                text: 'לפתרון בעיות יצירתי, ChatGPT או Claude יעזרו לך לחשוב מחוץ לקופסה ולמצוא פתרונות חדשניים!'
+            }
+        };
+
+        function generateSmartRecommendation() {
+            const goalKey = selectedGoal || (customGoal ? 'custom' : '');
+            if (!goalKey || goalKey === 'custom') return;
+
+            const recommendation = smartRecommendations[goalKey];
+            if (recommendation) {
+                document.getElementById('recommendationText').textContent = recommendation.text;
+                document.getElementById('smartRecommendation').style.display = 'block';
+                
+                // Highlight recommended platforms
+                recommendation.primary.forEach(platformId => {
+                    const platformCard = document.querySelector(`[onclick="selectPlatform('${platformId}')"]`);
+                    if (platformCard) {
+                        platformCard.style.border = '3px solid #10b981';
+                        platformCard.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.3)';
+                    }
+                });
+            }
+        }
+
         function selectOption(type, value, element) {
             // Remove selected class from all options in this group
             const parent = element.closest('.option-list');
@@ -1230,6 +1345,7 @@
             } else if (currentStep === 3) {
                 showStep(4);
                 updateProgress(80);
+                generateSmartRecommendation();
             } else if (currentStep === 4 && (selectedPlatform || customPlatform)) {
                 generatePrompt();
                 showStep(5);
@@ -1894,6 +2010,13 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם, מחו�
             analyzeBtn.classList.remove('bg-green-500');
             analyzeBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
             
+            // Reset smart recommendation
+            document.getElementById('smartRecommendation').style.display = 'none';
+            document.querySelectorAll('.ai-platform-card').forEach(card => {
+                card.style.border = '';
+                card.style.boxShadow = '';
+            });
+            
             // Reset buttons
             disableGoalNextButton();
             disablePlatformNextButton();
@@ -1931,9 +2054,9 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם, מחו�
 </html>
     <script id="html_badge_script1">
         window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDnohjbSm7qC2pWzacI96f50yjzeZ%2B6PSpY1%2Fg4yfy67j3hsw39iayudi1JECBPfI%2Bog6hbjQ8uU8MP9kuWqxCxA9aTr2oMoZg80583lMhns6jmIgnz0VGv2n8OlPfOLPqTc5s5SmoDRZL%2Fapg3g3tDB%2BjTwsbdAKq1ByvweJ78OqCDduUL04eEqojFYz%2BgXb0oyNcwfxatUv2gPH%2FJCc1kjgwhIhdW9OGjRX8wMV8sT3ZxO2QYGsC%2BzrEkNFWBtVyMSi0ltJm9bIMZ6zkhXeL%2BxVpDNfVgKbN6EvaPnVnJyOAoxhEesvpZbVd6v8KoBDrTjbEZkJ8Wv%2B4dYAmSUSa5grFDfASHeL%2B%2FNo5D4h%2Bxa38hOy2dWMeyfmcD8LEuMM0FxKjObrt%2FR%2Bh037TeSlHlBfxKjwWirLvzf%2BVGiC4Lb%2Bq5axN9EGE9OMHWuIaALzdRmZjYkO39oq1YgIdpyIas6a59bI%2F8CCmCJ7Dv%2FVuVPhTgm5UxzlPOrwK4RffqcWmeIc5DgcW1cSWbyZtOjPpcY%3D";
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDrH7K7pD%2FoXksPYkHt9myPjvXdrYDfYcpZt0DyuvyQqXyYgT8do08L5N80pZCVivxxUcYn2mJbjWyiELOgZjHBTaLSSnd37lkSAIoO%2BTaiwnEZB8%2BNllb4r1L8otBJA2436NImLATw4W9ppulUQUXDf50ylgVCyW1xhwagMkFJ4tZh9BNGGJhkNsZMJnglM8diz8j4m2sWX1vKYQmmuUXbrGPP8ElZFkAsUbNL%2BiyVgjnGotjYKuRyPLfxTY09HdZve1BtBY%2Fg1HJIbV%2BncyDp9A5m8JVerzfFE93jy%2FQLWzG32viv4ig2gHg4amqrhOoQpfj%2BkEfCjVpS02LrQtZwhHFfxvNM0tcfNzlN2hkH%2Fr9aHOMcesqyQ9C4SCB%2FdTPFhrfw4qDbuFwA2rCtaU6z%2BAFnwPlYRDAK6SCS4RWyCUP%2F5x4RUdiQsKdFUFmkiybuTLDgIrA99m%2FGKRq82%2FDPs5HsX751zsLKCMOJ9WETEyC%2BwhkLY6dY4l3ETK0XkcKQvEf4XbgBMr64tiojKRke8%3D";
         window.__genspark_locale = "en-US";
-        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDnohjbSm7qC2pWzacI96f50yjzeZ+6PSpY1/g4yfy67j3hsw39iayudi1JECBPfI+og6hbjQ8uU8MP9kuWqxCxA9aTr2oMoZg80583lMhns6jmIgnz0VGv2n8OlPfOLPqTc5s5SmoDRZL/apg3g3tDB+jTwsbdAKq1ByvweJ78OqCDduUL04eEqojFYz+gXb0oyNcwfxatUv2gPH/JCc1kjgwhIhdW9OGjRX8wMV8sT3ZxO2QYGsC+zrEkNFWBtVyMSi0ltJm9bIMZ6zkhXeL+xVpDNfVgKbN6EvaPnVnJyOAoxhEesvpZbVd6v8KoBDrTjbEZkJ8Wv+4dYAmSUSa5grFDfASHeL+/No5D4h+xa38hOy2dWMeyfmcD8LEuMM0FxKjObrt/R+h037TeSlHlBfxKjwWirLvzf+VGiC4Lb+q5axN9EGE9OMHWuIaALzdRmZjYkO39oq1YgIdpyIas6a59bI/8CCmCJ7Dv/VuVPhTgm5UxzlPOrwK4RffqcWmeIc5DgcW1cSWbyZtOjPpcY=";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDrH7K7pD/oXksPYkHt9myPjvXdrYDfYcpZt0DyuvyQqXyYgT8do08L5N80pZCVivxxUcYn2mJbjWyiELOgZjHBTaLSSnd37lkSAIoO+TaiwnEZB8+Nllb4r1L8otBJA2436NImLATw4W9ppulUQUXDf50ylgVCyW1xhwagMkFJ4tZh9BNGGJhkNsZMJnglM8diz8j4m2sWX1vKYQmmuUXbrGPP8ElZFkAsUbNL+iyVgjnGotjYKuRyPLfxTY09HdZve1BtBY/g1HJIbV+ncyDp9A5m8JVerzfFE93jy/QLWzG32viv4ig2gHg4amqrhOoQpfj+kEfCjVpS02LrQtZwhHFfxvNM0tcfNzlN2hkH/r9aHOMcesqyQ9C4SCB/dTPFhrfw4qDbuFwA2rCtaU6z+AFnwPlYRDAK6SCS4RWyCUP/5x4RUdiQsKdFUFmkiybuTLDgIrA99m/GKRq82/DPs5HsX751zsLKCMOJ9WETEyC+whkLY6dY4l3ETK0XkcKQvEf4XbgBMr64tiojKRke8=";
     </script>
     
     <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
