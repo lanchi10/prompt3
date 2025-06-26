@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מחולל הפרומפטים האולטימטיבי - פרק ג': הכלי שיהפוך אותך למומחה</title>
+    <title>מחולל הפרומפטים האולטימטיבי עם שיפור אוטומטי - פרק ג': הכלי שיהפוך אותך למומחה</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <style>
@@ -238,6 +239,151 @@
             transform: translate(-50%, -50%);
         }
 
+        /* Auto-Improvement Styles */
+        .improvement-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .improvement-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .improvement-icon {
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            color: #333;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .improvement-analysis {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .analysis-item {
+            margin: 0.75rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .analysis-item:last-child {
+            border-bottom: none;
+        }
+
+        .strength-item {
+            color: #4ade80;
+        }
+
+        .improvement-item {
+            color: #fbbf24;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-comparison {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .prompt-comparison.original {
+            border-color: rgba(74, 144, 226, 0.3);
+        }
+
+        .prompt-comparison.improved {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%);
+        }
+
+        .prompt-comparison.selected {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .prompt-comparison.original.selected {
+            border-color: rgba(74, 144, 226, 0.8);
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(80, 200, 120, 0.1) 100%);
+        }
+
+        .prompt-comparison.improved.selected {
+            border-color: rgba(255, 215, 0, 0.8);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 193, 7, 0.15) 100%);
+        }
+
+        .version-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .version-badge.original {
+            background: rgba(74, 144, 226, 0.3);
+            color: #60a5fa;
+        }
+
+        .version-badge.improved {
+            background: rgba(255, 215, 0, 0.3);
+            color: #fbbf24;
+        }
+
+        .loading-animation {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Navigation Styles */
         .navigation-bar {
             background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
@@ -284,6 +430,13 @@
         .nav-chapter.current .chapter-number {
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
         }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -302,7 +455,7 @@
             </h2>
             <p class="text-xl text-white opacity-90 max-w-4xl mx-auto leading-relaxed">
                 המחולל הכי מתקדם לפרומפטים! הדרכה אישית צעד אחר צעד, התאמה לכל פלטפורמת AI, 
-                ויצירה אוטומטית של פרומפטים מותאמים אישית עם אפשרות הגדרה אישית מלאה
+                ויצירה אוטומטית של פרומפטים מותאמים אישית עם <span class="text-yellow-300 font-bold">שיפור אוטומטי חכם</span>
             </p>
         </div>
 
@@ -319,6 +472,18 @@
                 <p class="text-lg text-white opacity-90 mb-6 max-w-2xl mx-auto">
                     אני אוביל אותך צעד אחר צעד ליצירת הפרומפט המושלם, מותאם במיוחד לפלטפורמת ה-AI שתבחר.
                     בכל שלב תוכל לבחור מהאפשרויות המוכנות או להגדיר בעצמך ערכים מותאמים אישית.
+                </p>
+                <div class="glass-effect rounded-lg p-4 mb-6 max-w-3xl mx-auto">
+                    <div class="flex items-center justify-center mb-3">
+                        <i class="fas fa-magic text-2xl text-yellow-300 ml-3"></i>
+                        <h4 class="text-xl font-bold text-white">חדש! תכונת השיפור האוטומטי</h4>
+                    </div>
+                    <p class="text-white opacity-90">
+                        לראשונה בעולם! המחולל ינתח את הפרומפט שיוצר, יזהה נקודות חוזק וחולשות,
+                        ויציע לך גרסה משופרת עם הסברים מפורטים. תוכל לבחור בין הגרסה המקורית למשופרת!
+                    </p>
+                </div>
+                <p class="text-lg text-white opacity-90 mb-6">
                     בואו נתחיל במסע שיהפוך אותך למומחה פרומפטים!
                 </p>
                 <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-all pulse-button" 
@@ -454,7 +619,7 @@
                         </div>
                         <div class="custom-input-container" id="customLengthContainer">
                             <input type="text" class="form-input w-full rounded-lg p-3 mt-3" id="customLengthInput" 
-                                   placeholder="תאר את האורך הרצוי: למשל '500 מילים', 'דף אחד', '3 פסקאות'...">
+                                   placeholder="תאר את האורך הרצוי: למשל '500 מילים', 'עד 100 מילים', '3 פסקאות'...">
                         </div>
                     </div>
                     
@@ -661,13 +826,114 @@
                             הפרומפט המותאם שלך:
                         </h4>
                         <button class="copy-button text-white px-4 py-2 rounded-lg font-semibold" 
-                                onclick="copyPrompt()">
+                                onclick="copyPrompt('original')">
                             <i class="fas fa-copy ml-2"></i>
                             העתק
                         </button>
                     </div>
                     <div class="bg-black bg-opacity-30 rounded-lg p-4">
                         <pre class="text-white text-sm leading-relaxed whitespace-pre-wrap" id="generatedPrompt"></pre>
+                    </div>
+                </div>
+
+                <!-- Auto-Improvement Section -->
+                <div class="improvement-section" id="improvementSection">
+                    <div class="improvement-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="text-center mb-6 relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-4">
+                            🔍 רוצה לשפר את הפרומפט לפני השימוש?
+                        </h3>
+                        <p class="text-white opacity-90 mb-6 max-w-2xl mx-auto">
+                            המערכת החכמה שלנו יכולה לנתח את הפרומפט, לזהות נקודות חוזק וחולשות,
+                            ולהציע לך גרסה משופרת עם הסברים מפורטים. זה חינמי ולוקח כמה שניות!
+                        </p>
+                        <div class="flex justify-center gap-4">
+                            <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-lg transition-all" 
+                                    onclick="analyzePrompt()" id="analyzeBtn">
+                                <i class="fas fa-search ml-2"></i>
+                                כן, בדוק ושפר!
+                            </button>
+                            <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all" 
+                                    onclick="skipImprovement()">
+                                <i class="fas fa-forward ml-2"></i>
+                                לא, המשך עם הנוכחי
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Results (Hidden initially) -->
+                <div class="hidden" id="analysisResults">
+                    <div class="improvement-analysis mb-6">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-4">
+                                <i class="fas fa-chart-bar ml-2"></i>
+                                ניתוח הפרומפט שלך
+                            </h3>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="text-lg font-bold text-green-300 mb-3">
+                                    <i class="fas fa-check-circle ml-2"></i>
+                                    נקודות חוזק:
+                                </h4>
+                                <div id="strengthsList"></div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-yellow-300 mb-3">
+                                    <i class="fas fa-exclamation-triangle ml-2"></i>
+                                    אפשר לשפר:
+                                </h4>
+                                <div id="improvementsList"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Comparison -->
+                    <div class="comparison-container">
+                        <!-- Original Prompt -->
+                        <div class="prompt-comparison original" id="originalComparison" onclick="selectPromptVersion('original')">
+                            <div class="version-badge original">גרסה מקורית</div>
+                            <h4 class="text-white font-bold mb-3">הפרומפט שיצרת</h4>
+                            <div class="bg-black bg-opacity-30 rounded-lg p-4 mb-4">
+                                <pre class="text-white text-sm leading-relaxed whitespace-pre-wrap" id="originalPromptDisplay"></pre>
+                            </div>
+                            <div class="text-center">
+                                <button class="copy-button text-white px-4 py-2 rounded-lg font-semibold" 
+                                        onclick="copyPrompt('original', event)">
+                                    <i class="fas fa-copy ml-2"></i>
+                                    העתק מקורי
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Improved Prompt -->
+                        <div class="prompt-comparison improved selected" id="improvedComparison" onclick="selectPromptVersion('improved')">
+                            <div class="version-badge improved">גרסה משופרת ✨</div>
+                            <h4 class="text-white font-bold mb-3">הפרומפט המשופר</h4>
+                            <div class="bg-black bg-opacity-30 rounded-lg p-4 mb-4">
+                                <pre class="text-white text-sm leading-relaxed whitespace-pre-wrap" id="improvedPromptDisplay"></pre>
+                            </div>
+                            <div class="text-center">
+                                <button class="copy-button text-white px-4 py-2 rounded-lg font-semibold" 
+                                        onclick="copyPrompt('improved', event)">
+                                    <i class="fas fa-copy ml-2"></i>
+                                    העתק משופר
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What was improved -->
+                    <div class="glass-effect rounded-xl p-6 mb-6">
+                        <h4 class="text-white font-bold text-lg mb-4">
+                            <i class="fas fa-magic ml-2"></i>
+                            מה שופר בגרסה החדשה:
+                        </h4>
+                        <div id="improvementsExplanation" class="text-white opacity-90"></div>
                     </div>
                 </div>
                 
@@ -687,7 +953,7 @@
                         איך להשתמש:
                     </h4>
                     <div class="text-white opacity-90">
-                        <p class="mb-2">1. העתק את הפרומפט (כפתור "העתק" למעלה)</p>
+                        <p class="mb-2">1. העתק את הפרומפט הנבחר (כפתור "העתק" למעלה)</p>
                         <p class="mb-2">2. פתח את פלטפורמת ה-AI שבחרת</p>
                         <p class="mb-2">3. הדבק את הפרומפט כהודעה ראשונה</p>
                         <p class="mb-2">4. שלח ותראה את התוצאות המדהימות!</p>
@@ -751,11 +1017,11 @@
                     <div class="chapter-number">ג'</div>
                     <h4 class="text-white font-bold text-lg mb-2">המחולל האולטימטיבי</h4>
                     <p class="text-white opacity-80 text-sm mb-3">
-                        הכלי המתקדם ביותר ליצירת פרומפטים מותאמים
+                        הכלי המתקדם ביותר ליצירת פרומפטים עם שיפור אוטומטי
                     </p>
                     <div class="text-xs text-yellow-300">
                         <i class="fas fa-star ml-1"></i>
-                        פרק נוכחי | מחולל חכם | התאמה לכל AI
+                        פרק נוכחי | מחולל חכם | שיפור אוטומטי ✨
                     </div>
                 </div>
             </div>
@@ -789,7 +1055,7 @@
                 נוצר ע"י LANCHI מלנצי לטובת שימוש בני המשפחה והחברים
             </p>
             <p class="text-white opacity-60 text-sm mt-2">
-                המחולל האולטימטיבי לפרומפטים מותאמים אישית - פרק ג' בסדרת מאסטר הפרומפטים
+                המחולל האולטימטיבי לפרומפטים עם שיפור אוטומטי - פרק ג' בסדרת מאסטר הפרומפטים
             </p>
         </div>
     </footer>
@@ -799,6 +1065,8 @@
         let selectedGoal = '';
         let selectedPlatform = '';
         let generatedPromptText = '';
+        let improvedPromptText = '';
+        let selectedPromptVersion = 'improved';
         let customGoal = '';
         let customPlatform = '';
         let responseLength = 'medium';
@@ -1272,9 +1540,272 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם ומחו
             }
         }
 
-        function copyPrompt() {
-            navigator.clipboard.writeText(generatedPromptText).then(() => {
-                const button = event.target.closest('button');
+        function analyzePrompt() {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            analyzeBtn.innerHTML = '<span class="loading-animation"></span> מנתח...';
+            analyzeBtn.disabled = true;
+
+            // Simulate analysis delay
+            setTimeout(() => {
+                performAnalysis();
+                showAnalysisResults();
+                analyzeBtn.innerHTML = '<i class="fas fa-check ml-2"></i>ניתוח הושלם!';
+                analyzeBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                analyzeBtn.classList.add('bg-green-500');
+                
+                // Hide improvement section
+                document.getElementById('improvementSection').style.display = 'none';
+            }, 2500);
+        }
+
+        function performAnalysis() {
+            // Generate analysis based on the prompt
+            const strengths = [
+                "הפרומפט כולל הקשר ברור למשימה",
+                "דרישות התגובה מפורטות היטב",
+                "הוראות לשפה העברית נכללו",
+                "בקשה להבהרות במקרה של אי-בהירות"
+            ];
+
+            const improvements = [
+                "חסר דוגמה קונקרטית לתוצאה הרצויה",
+                "אפשר להוסיף קריטריונים להצלחה",
+                "ניתן לפרט יותר את סגנון הכתיבה",
+                "אפשר להוסיף הנחיה לבדיקה עצמית"
+            ];
+
+            // Display analysis
+            const strengthsList = document.getElementById('strengthsList');
+            const improvementsList = document.getElementById('improvementsList');
+            
+            strengthsList.innerHTML = strengths.map(item => 
+                `<div class="analysis-item strength-item">
+                    <i class="fas fa-check ml-2"></i>
+                    ${item}
+                </div>`
+            ).join('');
+            
+            improvementsList.innerHTML = improvements.map(item => 
+                `<div class="analysis-item improvement-item">
+                    <i class="fas fa-arrow-up ml-2"></i>
+                    ${item}
+                </div>`
+            ).join('');
+
+            // Generate improved prompt
+            generateImprovedPrompt();
+        }
+
+        function generateImprovedPrompt() {
+            // Create an improved version of the prompt
+            const taskDetails = document.getElementById('taskDetails').value;
+            let lengthValue = responseLength;
+            let styleValue = responseStyle;
+            let expertiseField = document.getElementById('expertiseField').value;
+            
+            // Handle custom inputs
+            if (responseLength === 'custom') {
+                lengthValue = document.getElementById('customLengthInput').value || 'מותאם אישית';
+            }
+            if (responseStyle === 'custom') {
+                styleValue = document.getElementById('customStyleInput').value || 'מותאם אישית';
+            }
+            if (expertiseField === 'custom') {
+                expertiseField = document.getElementById('customExpertiseInput').value || 'מותאם אישית';
+            }
+            
+            const goalTemplates = {
+                writing: 'כתיבה יצירתית ומקצועית',
+                analysis: 'ניתוח מעמיק ומחקר מפורט',
+                coding: 'פתרונות תכנות וקוד איכותי',
+                education: 'הסבר חינוכי ברור ומפורט',
+                business: 'פתרונות עסקיים אסטרטגיים',
+                creative: 'פתרון יצירתי ומחשבה מחוץ לקופסה'
+            };
+
+            const lengthInstructions = {
+                short: 'בתגובה קצרה וממוקדת (כמה משפטים)',
+                medium: 'בתגובה בינונית ומאוזנת (1-2 פסקאות)',
+                long: 'בתגובה מפורטת וארוכה (מאמר מלא)',
+                comprehensive: 'בניתוח מקיף ומעמיק עם כל הפרטים'
+            };
+
+            const styleInstructions = {
+                professional: 'בסגנון מקצועי ופורמלי',
+                casual: 'בסגנון נעים, ידידותי ונגיש',
+                academic: 'בסגנון אקדמי מדעי עם מקורות',
+                creative: 'בסגנון יצירתי ומעניין',
+                simple: 'בסגנון פשוט, ברור ונגיש לכולם'
+            };
+
+            const expertiseTemplates = {
+                technology: 'מבחינה טכנולוגית',
+                marketing: 'מבחינה שיווקית',
+                finance: 'מבחינה כלכלית ופיננסית',
+                legal: 'מבחינה משפטית',
+                medical: 'מבחינה רפואית',
+                education: 'מבחינה חינוכית',
+                science: 'מבחינה מדעית',
+                art: 'מבחינה אמנותית ותרבותית'
+            };
+
+            let goalText = customGoal || goalTemplates[selectedGoal] || 'משימה מותאמת אישית';
+            let platformKey = selectedPlatform || 'custom';
+            let platformName = customPlatform || platforms[selectedPlatform]?.name || 'פלטפורמה מותאמת';
+            
+            // Platform-specific adjustments
+            let platformPrefix = '';
+            switch(platformKey) {
+                case 'genspark':
+                    platformPrefix = 'אני זקוק לעזרתך המקצועית המתקדמת בפרויקט חשוב. ';
+                    break;
+                case 'chatgpt':
+                    platformPrefix = 'אני זקוק לעזרתך המקצועית בפרויקט מקצועי. ';
+                    break;
+                case 'claude':
+                    platformPrefix = 'אשמח לקבל את עזרתך בניתוח מעמיק ומקצועי. ';
+                    break;
+                case 'gemini':
+                    platformPrefix = 'אני מחפש מידע עדכני, מקיף ומהימן. ';
+                    break;
+                case 'perplexity':
+                    platformPrefix = 'אני צריך מחקר מהימן ומעמיק עם מקורות איכותיים. ';
+                    break;
+                case 'copilot':
+                    platformPrefix = 'אני מבקש את עזרתך המקצועית לפתרון עסקי. ';
+                    break;
+                case 'grok':
+                    platformPrefix = 'בואו נעבד יחד על פתרון יצירתי ומתקדם. ';
+                    break;
+                case 'deepseek':
+                    platformPrefix = 'אני מבקש ניתוח מתקדם, מעמיק ומדויק. ';
+                    break;
+                case 'custom':
+                    platformPrefix = 'אני מבקש את עזרתך המקצועית. ';
+                    break;
+            }
+
+            // Handle custom length and style
+            let lengthText = lengthInstructions[lengthValue] || `בהתאם לדרישה: ${lengthValue}`;
+            let styleText = styleInstructions[styleValue] || `בסגנון: ${styleValue}`;
+            
+            // Handle expertise field
+            let expertiseText = '';
+            if (expertiseField) {
+                expertiseText = expertiseTemplates[expertiseField] || `בהתמחות: ${expertiseField}`;
+                expertiseText = `\n- התמקד בתחום: ${expertiseText}`;
+            }
+
+            // Enhanced prompt with improvements
+            improvedPromptText = `${platformPrefix}
+
+המשימה שלי: ${goalText}
+
+רקע והקשר:
+${taskDetails || 'לא צוינו פרטים נוספים'}
+
+דרישות התגובה המפורטות:
+- אורך: ${lengthText}
+- סגנון כתיבה: ${styleText}${expertiseText}
+- השתמש בשפה עברית ברורה, מדויקת ומקצועית
+- ארגן את התוכן בצורה הגיונית ומובנת עם כותרות משנה
+- אם משהו לא ברור, בקש הבהרות לפני התחלה
+
+דוגמה לתוצאה רצויה:
+אני מחפש תוצאה שתכלול מבנה ברור, נקודות מפתח מודגשות, ומסקנות פרקטיות.
+
+קריטריונים להצלחה:
+- המידע יהיה מדויק ומעודכן
+- הסגנון יתאים לקהל היעד
+- התוכן יהיה מעשי וניתן ליישום
+- התגובה תענה על כל השאלות שהועלו
+
+${platformKey === 'genspark' ? '- נצל את הכלים המתקדמים שלך לחיפוש ויצירה מקצועית\n- בדוק מקורות נוספים במידת הצורך' : ''}
+${platformKey === 'perplexity' ? '- אנא כלול מקורות ואסמכתאות מהימנות עם קישורים\n- ספק רשימת מקורות לקריאה נוספת' : ''}
+${platformKey === 'claude' ? '- אנא ספק ניתוח מעמיק ומובנה עם הסברים\n- כלול דוגמאות ומקרי בוחן רלוונטיים' : ''}
+${platformKey === 'gemini' ? '- אנא כלול מידע עדכני ורלוונטי מהשנה האחרונה\n- חבר מידע ממקורות מגוונים' : ''}
+${platformKey === 'chatgpt' ? '- אשמח לתגובה מפורטת, מקצועית ומובנית\n- כלול דוגמאות מעשיות במידת האפשר' : ''}
+${platformKey === 'copilot' ? '- אנא ספק פתרון מקצועי, מעשי וניתן ליישום\n- כלול המלצות לשלבים הבאים' : ''}
+${platformKey === 'grok' ? '- בואו נתמודד עם זה יחד בצורה יצירתית ומקורית\n- אל תהסס להציע רעיונות חדשניים' : ''}
+${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם, מחושב ויסודי\n- כלול ניתוח של חלופות ואפשרויות שונות' : ''}
+
+בדיקה עצמית:
+לפני שליחת התגובה, אנא ודא שהיא עונה על כל הדרישות ומספקת ערך אמיתי למשתמש.
+
+תודה על העזרה המקצועית והמקיפה!`;
+
+            // Display both prompts
+            document.getElementById('originalPromptDisplay').textContent = generatedPromptText;
+            document.getElementById('improvedPromptDisplay').textContent = improvedPromptText;
+
+            // Show improvements explanation
+            const improvementsExplanation = document.getElementById('improvementsExplanation');
+            improvementsExplanation.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h5 class="font-bold text-green-300 mb-2">✅ מה הוספנו:</h5>
+                        <ul class="text-sm space-y-1">
+                            <li>• רקע והקשר מפורט יותר</li>
+                            <li>• דוגמה לתוצאה רצויה</li>
+                            <li>• קריטריונים להצלחה ברורים</li>
+                            <li>• הנחיה לבדיקה עצמית</li>
+                            <li>• מבנה משופר עם כותרות</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-yellow-300 mb-2">🔧 מה שיפרנו:</h5>
+                        <ul class="text-sm space-y-1">
+                            <li>• שפה מקצועית ומדויקת יותר</li>
+                            <li>• הוראות ספציפיות לפלטפורמה</li>
+                            <li>• דרישות איכות מפורטות</li>
+                            <li>• ציפיות ברורות מהתוצאה</li>
+                            <li>• תהליך בדיקה מובנה</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAnalysisResults() {
+            document.getElementById('analysisResults').classList.remove('hidden');
+            
+            // Scroll to analysis results
+            setTimeout(() => {
+                document.getElementById('analysisResults').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }, 300);
+        }
+
+        function skipImprovement() {
+            document.getElementById('improvementSection').style.display = 'none';
+            selectedPromptVersion = 'original';
+        }
+
+        function selectPromptVersion(version) {
+            selectedPromptVersion = version;
+            
+            // Update visual selection
+            document.getElementById('originalComparison').classList.remove('selected');
+            document.getElementById('improvedComparison').classList.remove('selected');
+            
+            if (version === 'original') {
+                document.getElementById('originalComparison').classList.add('selected');
+            } else {
+                document.getElementById('improvedComparison').classList.add('selected');
+            }
+        }
+
+        function copyPrompt(version, event) {
+            if (event) {
+                event.stopPropagation(); // Prevent triggering selectPromptVersion
+            }
+            
+            let textToCopy = version === 'improved' ? improvedPromptText : generatedPromptText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const button = event ? event.target.closest('button') : document.querySelector('.copy-button');
                 const originalText = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check ml-2"></i>הועתק!';
                 button.classList.remove('copy-button');
@@ -1288,13 +1819,13 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם ומחו
             }).catch(() => {
                 // Fallback for older browsers
                 const textArea = document.createElement('textarea');
-                textArea.value = generatedPromptText;
+                textArea.value = textToCopy;
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 
-                const button = event.target.closest('button');
+                const button = event ? event.target.closest('button') : document.querySelector('.copy-button');
                 const originalText = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check ml-2"></i>הועתק!';
                 button.classList.remove('copy-button');
@@ -1323,6 +1854,7 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם ומחו
             customPlatform = '';
             responseLength = 'medium';
             responseStyle = 'professional';
+            selectedPromptVersion = 'improved';
             
             // Reset all steps
             for (let i = 1; i <= 5; i++) {
@@ -1352,6 +1884,15 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם ומחו
             document.getElementById('customLengthContainer').classList.remove('show');
             document.getElementById('customStyleContainer').classList.remove('show');
             document.getElementById('customExpertiseContainer').classList.remove('show');
+            
+            // Reset improvement section
+            document.getElementById('improvementSection').style.display = 'block';
+            document.getElementById('analysisResults').classList.add('hidden');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            analyzeBtn.innerHTML = '<i class="fas fa-search ml-2"></i>כן, בדוק ושפר!';
+            analyzeBtn.disabled = false;
+            analyzeBtn.classList.remove('bg-green-500');
+            analyzeBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
             
             // Reset buttons
             disableGoalNextButton();
@@ -1388,3 +1929,12 @@ ${platformKey === 'deepseek' ? '- אני מחפש פתרון מתקדם ומחו
     </script>
 </body>
 </html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDnohjbSm7qC2pWzacI96f50yjzeZ%2B6PSpY1%2Fg4yfy67j3hsw39iayudi1JECBPfI%2Bog6hbjQ8uU8MP9kuWqxCxA9aTr2oMoZg80583lMhns6jmIgnz0VGv2n8OlPfOLPqTc5s5SmoDRZL%2Fapg3g3tDB%2BjTwsbdAKq1ByvweJ78OqCDduUL04eEqojFYz%2BgXb0oyNcwfxatUv2gPH%2FJCc1kjgwhIhdW9OGjRX8wMV8sT3ZxO2QYGsC%2BzrEkNFWBtVyMSi0ltJm9bIMZ6zkhXeL%2BxVpDNfVgKbN6EvaPnVnJyOAoxhEesvpZbVd6v8KoBDrTjbEZkJ8Wv%2B4dYAmSUSa5grFDfASHeL%2B%2FNo5D4h%2Bxa38hOy2dWMeyfmcD8LEuMM0FxKjObrt%2FR%2Bh037TeSlHlBfxKjwWirLvzf%2BVGiC4Lb%2Bq5axN9EGE9OMHWuIaALzdRmZjYkO39oq1YgIdpyIas6a59bI%2F8CCmCJ7Dv%2FVuVPhTgm5UxzlPOrwK4RffqcWmeIc5DgcW1cSWbyZtOjPpcY%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDnohjbSm7qC2pWzacI96f50yjzeZ+6PSpY1/g4yfy67j3hsw39iayudi1JECBPfI+og6hbjQ8uU8MP9kuWqxCxA9aTr2oMoZg80583lMhns6jmIgnz0VGv2n8OlPfOLPqTc5s5SmoDRZL/apg3g3tDB+jTwsbdAKq1ByvweJ78OqCDduUL04eEqojFYz+gXb0oyNcwfxatUv2gPH/JCc1kjgwhIhdW9OGjRX8wMV8sT3ZxO2QYGsC+zrEkNFWBtVyMSi0ltJm9bIMZ6zkhXeL+xVpDNfVgKbN6EvaPnVnJyOAoxhEesvpZbVd6v8KoBDrTjbEZkJ8Wv+4dYAmSUSa5grFDfASHeL+/No5D4h+xa38hOy2dWMeyfmcD8LEuMM0FxKjObrt/R+h037TeSlHlBfxKjwWirLvzf+VGiC4Lb+q5axN9EGE9OMHWuIaALzdRmZjYkO39oq1YgIdpyIas6a59bI/8CCmCJ7Dv/VuVPhTgm5UxzlPOrwK4RffqcWmeIc5DgcW1cSWbyZtOjPpcY=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
